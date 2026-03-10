@@ -1,5 +1,5 @@
 baseURL = 'https://moxcz.github.io/vault/'
-title = 'Home'
+title = "Oscar's Vault"
 theme= 'papermod'
 languageCode = 'en-us'
 copyright = "© [MoXcz](https://github.com/moxcz)"
@@ -91,7 +91,7 @@ ShowToc = true
 images = [""]
 
 [params.homeInfoParams]
-Title = "Oscar's Vault"
+Title = 'Home'
 Content = """
 Welcome to my public knowledge base.
 
