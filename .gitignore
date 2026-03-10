@@ -1,0 +1,4 @@
+build.py
+.hugo_build.lock
+public/
+
