@@ -104,7 +104,7 @@ title = "View Source on Github"
 url = "https://github.com/moxcz/vault"
 
 [params.editPost]
-URL = "https://github.com/moxcz/moxcz/tree/main/site/content"
+URL = "https://github.com/moxcz/vault/tree/main/content"
 Text = "Suggest Changes"
 appendFilePath = true
 
