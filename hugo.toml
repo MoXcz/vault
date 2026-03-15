@@ -1,6 +1,6 @@
-baseURL = 'https://moxcz.github.io/vault/'
+baseURL = 'https://blog.oskr.one'
 title = "Oscar's Vault"
-theme= 'papermod'
+theme = 'papermod'
 languageCode = 'en-us'
 copyright = "© [MoXcz](https://github.com/moxcz)"
 
