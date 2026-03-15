@@ -1,4 +1,5 @@
 .PHONY: export build serve clean
+include .env
 
 build:
 	hugo --cleanDestinationDir
@@ -15,4 +16,8 @@ export:
 publish: build
 	git add . && \
 	git commit -m "update $$(date '+%Y-%m-%d')" || true && \
-	git push
+	git push && \
+	rsync -avz ~/notes/site/public/ ${REMOTE_DIR}
+
+send: build
+	rsync -avz ~/notes/site/public/ ${REMOTE_DIR}
