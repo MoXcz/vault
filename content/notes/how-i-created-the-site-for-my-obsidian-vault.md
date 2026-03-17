@@ -2,6 +2,10 @@
 author: ["Oscar Marquez"]
 title: "How I created the site for my Obsidian vault"
 date: "2026-03-15"
+tags:
+  - obsidian
+  - script
+  - python
 ---
 This site is created using very simple script that transforms notes with certain parameters defined in `build.py` into ready-to-publish notes. The site itself is quite simple in usage, it uses [hugo](https://gohugo.io/) with a slightly modified [hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod/tree/master) theme that just uses the transformed Markdown files into HTML.
 
