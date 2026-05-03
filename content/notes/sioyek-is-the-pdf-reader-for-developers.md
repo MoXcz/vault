@@ -79,7 +79,7 @@ function book() {
   fi
 
   local BOOK=$(find ~/Documents/books -maxdepth 1 -name "*pdf" | fzf)
-  if [ -z $BOOK ](/notes/z-book/); then
+  if [[ -z $BOOK ]]; then
       return 0
   fi
 
