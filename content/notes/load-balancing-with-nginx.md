@@ -10,14 +10,14 @@ tags:
 # Load balancing with `nginx`
 
 [Load balancing](https://www.cloudflare.com/learning/performance/what-is-load-balancing/) is the process of distributing traffic across multiple servers with the intent of increasing performance and reliability.
-
 ![load-balancer](/images/load-balancer.svg)
 
-The software in charge of balancing the traffic can be a general-purpose web server acting as a reverse proxy, like [nginx](https://nginx.org/), or a dedicated load balancer like [HAProxy](http://www.haproxy.org/). The purpose of this guide is to build a load balancer using Docker and nginx, and to keep it at the bare minimum I will make use of three machines, the minimum necessary to make use of a load balancer:
+The software in charge of balancing the traffic can be a general-purpose web server acting as a reverse proxy, like [nginx](https://nginx.org/), or a dedicated load balancer like [HAProxy](http://www.haproxy.org/).
 
-- Server A: The Load Balancer
-- Server B: Backend Server 1
-- Server C: Backend Server 2
+The purpose of this guide is to build a load balancer using Docker and nginx, and to keep it at the bare minimum I will make use of three machines, the minimum necessary to make use of a load balancer:
+- Server A: The load balancer
+- Server B: Backend server 1
+- Server C: Backend server 2
 
 ## Setting up B and C
 
@@ -68,14 +68,14 @@ Just make sure to put the PHP files inside `./app`, or change the volume for the
 
 ## Setting up A
 
-With that out of the way, now it's necessary to somehow tell A where to route the traffic to. For that you need to know the IP addresses of B and C, log into those machines and just run:
+For A, we somehow need to tell it where to route the traffic to. In order to do this is first necessary to know the IP addresses of both B and C. Log into those machines and run:
 ```bash
 ip a
 ```
 
 Look for the `inet` address under your primary network interface (e.g., `eth0` or `wlan0`). Note both IPs down (for example, `10.0.0.2` and `10.0.0.3`).
 
-With the IPs of B and C, now create the `default.conf` file for `nginx`, specifying these IPs on an `upstream` block. Note that by default `nginx` uses a [Round Robin](https://en.wikipedia.org/wiki/Round-robin) algorithm:
+With the IPs of B and C, now create the `default.conf` file for `nginx`, specifying these IPs on an `upstream` block. Note that by default `nginx` uses a [Round Robin](https://en.wikipedia.org/wiki/Round-robin) algorithm (see below):
 ```nginx
 upstream php_backend {
     # Replace these IPs with the ones from 'ip a'
@@ -95,7 +95,7 @@ server {
 }
 ```
 
-And the `compose.yml` file used (for this one you could use `docker run nginx` the thing):
+And the `compose.yml` file used (for this one you could just `docker run nginx` the thing):
 ```yaml
 services:
   nginx:
@@ -109,17 +109,36 @@ services:
 
 > To start any of the `compose.yml` files run: docker compose up -d
 
-And that's it. If everything was done correctly you should be able to search the IP of A and on refresh get either a responses from B or C. You could easily verify this by just including different applications with something like `Hi from B` and `Hi from C`.
+And that's it. If everything was done correctly you should be able to search the IP of A and on refresh get either a response from B or C. You could easily verify this by just including different applications with something like `Hi from B` and `Hi from C`.
 
-## Firewall
+## Extras
 
-This might not work correctly if you have a firewall, I use `ufw` and for it, you need to do:
+### Firewall
+
+This might not work correctly if you have set up a firewall. I use `ufw` on my machines, and for this specific case you can just allow the port:
 ```sh
 sudo ufw allow 420
 ```
 
+### Algorithms for balancing
+
+There are different algorithms that can be used for `nginx` to balance traffic:
+- Round-robin. The default, will alternate between servers.
+- Weighted round-robin. Variant of round-robin where each server has an assigned priority (weight).
+- Least connections. Will send request to the server with the least amount of active connections at that moment.
+- IP hash. Assigns to each incoming IP to a server and always routes that IP to that server.
+
+You can assign these values on `default.conf` in the `upstream` block, for example, IP hash would look like this:
+```nginx
+upstream php_backend {
+    ip_hash;
+    server <SERVER_B_IP>:420;
+    server <SERVER_C_IP>:420;
+}
+```
+
 ## The end
 
-You can actually easily transform this to use anything other than PHP, but it was used in one of my classes, so there's that. To change it just transform the server from `nginx` + `php-fpm` to whatever you want (e.g., Go, Apache, Caddy).
+You can actually very easily transform this to use anything other than PHP, but PHP was recently used in one of my classes, so there's that. To change it just transform the server from `nginx` + `php-fpm` to whatever you want (e.g., Go, Apache, Caddy).
 
 You can check out the repository of this blog post in [GitHub](https://github.com/MoXcz/load-balancing-with-nginx).
