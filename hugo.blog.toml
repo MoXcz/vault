@@ -1,0 +1,2 @@
+baseURL = 'https://oskr.one/blog/'
+publishDir = 'public/blog'

@@ -1,4 +1,4 @@
-baseURL = 'https://blog.oskr.one'
+baseURL = 'https://oskr.one'
 title = "Oscar's Vault"
 theme = 'papermod'
 languageCode = 'en-us'
@@ -11,7 +11,6 @@ buildFuture = false
 buildExpired = false
 enableEmoji = true
 pygmentsUseClasses = true
-mainsections = ["notes"]
 
 [minify]
 disableXML = true
@@ -28,11 +27,6 @@ weight = 1
 
 [languages.en.taxonomies]
 tag = "tags"
-
-[[languages.en.menu.main]]
-name = "Notes"
-url = "notes"
-weight = 4
 
 [[languages.en.menu.main]]
 name = "Archive"

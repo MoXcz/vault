@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oscar Marquez</title>
+  <meta name="description" content="Personal website and public notes.">
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --fg: #1f1f1f;
+      --muted: #5d5a54;
+      --line: #d8d3c8;
+      --accent: #2d4f6c;
+      --accent-hover: #1e3e58;
+      --card: #fffef9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", serif;
+      color: var(--fg);
+      background:
+        radial-gradient(circle at 20% 10%, #ffffff 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, #ece6d9 0%, transparent 35%),
+        var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(760px, 100%);
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 16px;
+      padding: 34px 28px;
+      box-shadow: 0 16px 36px rgba(52, 44, 26, 0.09);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: 0.02em;
+    }
+
+    p {
+      margin: 14px 0 0;
+      line-height: 1.65;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .actions {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    a {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 11px 15px;
+      color: var(--fg);
+      font-weight: 600;
+      transition: transform 120ms ease, border-color 120ms ease, background-color 120ms ease, color 120ms ease;
+    }
+
+    a:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+      color: var(--accent);
+      background-color: #f4f8fc;
+    }
+
+    a.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    a.primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <h1>Hi, I'm Oscar.</h1>
+    <p>
+      This is my personal corner on the internet. I write and publish notes from my vault.
+      If you're here for the knowledge base, jump straight into the blog.
+    </p>
+    <nav class="actions" aria-label="Primary">
+      <a class="primary" href="/blog/">Read the blog</a>
+      <a href="https://github.com/moxcz">GitHub</a>
+    </nav>
+  </main>
+</body>
+
+</html>
