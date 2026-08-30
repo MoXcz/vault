@@ -1,15 +1,20 @@
 ---
 author: ["Oscar Marquez"]
 title: "How I created the site for my Obsidian vault"
-date: "2026-03-15"
+description: "A small Python script that turns notes marked publish: true into a Hugo site."
+pubDate: "2026-03-15"
 tags:
   - obsidian
   - script
   - python
 ---
+
+> Kind of obsolete, I now use [Astro](https://astro.build/) to serve the files from my vault, you can still check the repo for any new posts I add, this new repo is private :)
+
 This site is created using very simple script that transforms notes with certain parameters defined in `build.py` into ready-to-publish notes. The site itself is quite simple in usage, it uses [hugo](https://gohugo.io/) with a slightly modified [hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod/tree/master) theme that just uses the transformed Markdown files into HTML.
 
 `build.py` performs a simple regular expression to find `publish: true` inside my `Notes/` directory:
+
 ```python
 HOME = Path.home()
 VAULT = HOME / "notes"
@@ -34,6 +39,7 @@ After the script runs through all the files inside my vault I have a `site` dire
 > You can find the public files in the repository I have available at GitHub: [vault](http://github.com/moxcz/vault).
 
 In short this is what I do:
+
 ```sh
 ./build.py
 hugo build
@@ -42,11 +48,13 @@ rsync <...>
 ```
 
 But to avoid doing this every time I have all those steps inside a `Makefile` that allows me to simply do:
+
 ```sh
 make publish
 ```
 
 Now all I have to do is to sit down, write a note I know will become publicly available and do `<C-t` and select my blog template:
+
 ```
 ---
 publish: true
@@ -54,4 +62,3 @@ publish: true
 ```
 
 This is all I need. I could of course make it more sophisticated; I've seen some mental gardens that even show the famous Obsidian graph view, but all I want is some simple way to put my thoughts on the internet, and this does it for me.
-
